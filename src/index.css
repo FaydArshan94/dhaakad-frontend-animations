@@ -1,1 +1,12 @@
 @import "tailwindcss";
+
+@font-face {
+    font-family: Cons;
+    src: url(src\assets\CopernicusNewCondTrial-110-BF6616045000e13.otf);
+}
+
+
+@font-face {
+    font-family: Tric;
+    src: url(C:\Users\pc\dhaakad-frontend-animations\src\assets\TestMetric-Regular-BF663c3a83720bf.otf);
+}

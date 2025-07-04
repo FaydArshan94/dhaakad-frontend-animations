@@ -1,6 +1,8 @@
 import { useRef } from "react";
 import gsap from "gsap";
+import ScrollReveal from "./ScrollReveal";
 
+// ✅ HoverVideoBlock defined here (not imported)
 const HoverVideoBlock = ({ image, video, title }) => {
   const videoRef = useRef(null);
   const imageRef = useRef(null);
@@ -73,9 +75,9 @@ const HoverVideoBlock = ({ image, video, title }) => {
     <div
       onMouseEnter={handleHover}
       onMouseLeave={handleLeave}
-      className="flex-1 h-screen relative group  overflow-hidden flex items-start justify-start"
+      className="flex-1 h-screen relative group overflow-hidden flex items-start justify-start"
     >
-      {/* Image (default visible) */}
+      {/* Image */}
       <img
         ref={imageRef}
         src={image}
@@ -83,7 +85,7 @@ const HoverVideoBlock = ({ image, video, title }) => {
         className="w-full h-full object-cover"
       />
 
-      {/* Video (on hover) */}
+      {/* Video */}
       <video
         ref={videoRef}
         src={video}
@@ -107,10 +109,29 @@ const HoverVideoBlock = ({ image, video, title }) => {
   );
 };
 
+// ✅ Section3 uses HoverVideoBlock
 const Section3 = () => {
+  const textRef = useRef(null);
+
+  const handleHover = () => {
+    gsap.to(textRef.current, {
+      y: "0%",
+      duration: 0.5,
+      ease: "power3.out",
+    });
+  };
+
+  const handleLeave = () => {
+    gsap.to(textRef.current, {
+      y: "100%",
+      duration: 0.5,
+      ease: "power3.inOut",
+    });
+  };
+
   return (
-    <section className="min-h-screen  px-6 py-16 text-white">
-      <div className="flex flex-col  md:flex-row md:items-start gap-5 mx-auto">
+    <section className="min-h-screen px-6 py-16 text-white">
+      <div className="flex flex-col md:flex-row md:items-start gap-5 mx-auto">
         <HoverVideoBlock
           image="https://api.themill.com/wp-content/uploads/2024/08/Screen-Shot-2024-08-12-at-9.28.56-AM-Large.jpeg"
           video="https://player.vimeo.com/progressive_redirect/playback/997728111/rendition/1080p/file.mp4?loc=external&signature=b99d9dbc2b9d4b012b82c5219656a5d3ad147f340d407f98fd68e1fa4fd6edf5"
@@ -122,6 +143,31 @@ const Section3 = () => {
           title="Halloween FX Composition"
         />
       </div>
+
+      {/* Custom block with text animation */}
+      <ScrollReveal>
+        <div
+          className="bg-red-500 w-1/2 h-screen mt-10 relative overflow-hidden group"
+          onMouseEnter={handleHover}
+          onMouseLeave={handleLeave}
+        >
+          <img
+            className="h-full w-full object-cover"
+            src="https://api.themill.com/wp-content/uploads/2023/11/undefined-high-2.gif"
+            alt=""
+          />
+
+          <div className="absolute bottom-6 left-6 h-8 overflow-hidden z-50">
+            <div
+              ref={textRef}
+              className="text-white text-2xl font-semibold"
+              style={{ transform: "translateY(100%)" }}
+            >
+              FX Reel
+            </div>
+          </div>
+        </div>
+      </ScrollReveal>
     </section>
   );
 };

@@ -3,6 +3,7 @@ import WorkItem from "./WorkItem";
 import WorkItem2 from "./WorkItem2";
 import gsap from "gsap";
 import Section3 from "./Section3";
+import ScrollReveal from "./ScrollReveal";
 
 // Section 1 Projects
 const projects = [
@@ -21,10 +22,12 @@ const projects = [
   {
     type: "video",
     src: "https://player.vimeo.com/progressive_redirect/playback/1026252865/rendition/1080p/file.mp4?loc=external&signature=e4ad9c840575abcba7dd1dbd4e8048c97f4e7dd9c3a2cbb50ce8fa24b1e59bf2",
-    cover: "https://api.themill.com/wp-content/uploads/2024/06/Screenshot-2024-06-05-at-3.18.17-PM.jpg",
+    cover:
+      "https://api.themill.com/wp-content/uploads/2024/06/Screenshot-2024-06-05-at-3.18.17-PM.jpg",
     title: "Apple Vision",
     subtitle: "Product Launch",
   },
+ 
 ];
 
 // Section 2 Projects
@@ -121,74 +124,97 @@ const Work = () => {
   return (
     <>
       {/* Section 1 */}
-      <section className="min-h-screen px-6 py-4 text-white">
-        <div className="w-full flex flex-col gap-4 items-center">
-          <h2 className="text-2xl md:text-2xl w-[45%] text-center">
-            The Mill is a full-service creative content studio. A community of
-            creative pioneers who strive to push creative and technical
-            boundaries. Empowered by our heritage, we are focused on building
-            the legacy for the future of The Mill.
-          </h2>
-          <h2 className="text-2xl md:text-2xl w-[45%] text-center">
-            Whether it is our clients, our fellow artists, or anyone who makes
-            delivering world-class work possible, our mission and values are the
-            touchstones for who we are, how we perform and the content we
-            create.
-          </h2>
+      <section className="min-h-screen px-6 py-8  text-white">
+        <div className="w-full flex flex-col gap-4 px-80  justify-center items-center">
+          <ScrollReveal>
+            <h2 className="text-2xl md:text-2xl mt-10  font-[Cons] text-center">
+              The Mill is a full-service creative content studio. A community of
+              creative pioneers who strive to push creative and technical
+              boundaries. Empowered by our heritage, we are focused on building
+              the legacy for the future of The Mill.
+            </h2>
+          </ScrollReveal>
+          <ScrollReveal>
+            <h2 className="text-2xl md:text-2xl  font-[Cons] text-center">
+              Whether it is our clients, our fellow artists, or anyone who makes
+              delivering world-class work possible, our mission and values are
+              the touchstones for who we are, how we perform and the content we
+              create.
+            </h2>
+          </ScrollReveal>
         </div>
 
         {/* Grid layout */}
+        {/* Grid layout */}
         <div className="flex flex-col md:flex-row gap-5 mt-10 max-w-8xl mx-auto">
           <div className="flex-1">
-            <WorkItem item={projects[0]} isLarge />
+            <ScrollReveal>
+              <WorkItem item={projects[0]} isLarge />
+            </ScrollReveal>
           </div>
+
           <div className="flex flex-col gap-5 flex-1">
             {projects.slice(1).map((item, index) => (
-              <WorkItem key={index} item={item} />
+              <div key={index}>
+                <ScrollReveal>
+                  <WorkItem item={item} />
+                </ScrollReveal>
+              </div>
             ))}
           </div>
         </div>
 
         {/* HoloDrive Block 1 */}
-        <div
-          onMouseEnter={handleHover}
-          onMouseLeave={handleLeave}
-          className="w-full h-screen mt-5 relative group"
-        >
-          <img
-            ref={imageRef}
-            className="h-full w-full object-cover"
-            src="https://api.themill.com/wp-content/uploads/2024/11/Holo-Drive-hero-Large.jpeg"
-            alt=""
-          />
-          <video
-            ref={videoRef}
-            className="w-full h-full object-cover absolute top-0 left-0 hidden"
-            src="https://player.vimeo.com/progressive_redirect/playback/1030180077/rendition/1080p/file.mp4?loc=external&signature=a62b08cc6908e2efb941d25898a815bd34d8d179185b4f937dbd8d58ed54228c"
-            muted
-            playsInline
-            loop
-          ></video>
-          <div className="absolute bottom-6 left-6 h-8 overflow-hidden z-50">
-            <div
-              ref={textRef}
-              className="text-white text-xl font-semibold"
-              style={{ transform: "translateY(100%)" }}
-            >
-              HoloDrive, the groundbreaking photographic location capture
-              technique
+        <ScrollReveal>
+          <div
+            onMouseEnter={handleHover}
+            onMouseLeave={handleLeave}
+            className="w-full h-screen mt-10 relative group overflow-hidden"
+          >
+            {/* Image (initially visible) */}
+            <img
+              ref={imageRef}
+              className="h-full w-full object-cover"
+              src="https://api.themill.com/wp-content/uploads/2024/11/Holo-Drive-hero-Large.jpeg"
+              alt=""
+            />
+
+            {/* Video (on hover) */}
+            <video
+              ref={videoRef}
+              className="w-full h-full object-cover absolute top-0 left-0 hidden"
+              src="https://player.vimeo.com/progressive_redirect/playback/1030180077/rendition/1080p/file.mp4?loc=external&signature=a62b08cc6908e2efb941d25898a815bd34d8d179185b4f937dbd8d58ed54228c"
+              muted
+              playsInline
+              loop
+            ></video>
+
+            {/* Text Reveal */}
+            <div className="absolute bottom-6 left-6 h-8 overflow-hidden z-50">
+              <div
+                ref={textRef}
+                className="text-white text-xl font-semibold"
+                style={{ transform: "translateY(100%)" }}
+              >
+                HoloDrive, the groundbreaking photographic location capture
+                technique
+              </div>
             </div>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       {/* Section 2 */}
-      <section className="min-h-screen px-6 py-4 text-white">
+      <section className="min-h-screen px-6 py-4  text-white">
         <div className="flex flex-col md:flex-row gap-5 mx-auto">
           {/* Left side */}
           <div className="flex flex-col gap-5 flex-1">
             {photoProjects.map((item, index) => (
-              <WorkItem2 key={index} item={item} />
+              <div key={index}>
+                <ScrollReveal>
+                  <WorkItem2 item={item} />
+                </ScrollReveal>
+              </div>
             ))}
           </div>
 
@@ -206,12 +232,14 @@ const Work = () => {
               playsInline
               loop
             ></video>
-            <img
-              ref={imageRef2}
-              className="w-full h-full object-cover"
-              src="https://api.themill.com/wp-content/uploads/2024/11/Holo-Drive-hero-Large.jpeg"
-              alt=""
-            />
+            <ScrollReveal>
+              <img
+                ref={imageRef2}
+                className="w-full h-screen object-cover"
+                src="https://api.themill.com/wp-content/uploads/2024/11/Holo-Drive-hero-Large.jpeg"
+                alt=""
+              />
+            </ScrollReveal>
             <div className="absolute bottom-6 left-6 h-8 overflow-hidden z-50">
               <div
                 ref={textRef2}
@@ -226,8 +254,10 @@ const Work = () => {
         </div>
       </section>
 
-      <Section3 />
-
+      {/* Optional ScrollReveal on Section3 */}
+      <ScrollReveal>
+        <Section3 />
+      </ScrollReveal>
     </>
   );
 };
